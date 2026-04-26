@@ -17,13 +17,11 @@ npm run preview  # preview production build
 
 ## Architecture
 
-The entire app lives in a single file: `src/App.jsx`. There is no routing, no context, no custom hooks, and no external state library — just one React component with `useState`.
+There is no routing, no context, no custom hooks, and no external state library. The app is split into four components:
 
-**State shape:**
-- `transactions` — array of `{ id, description, amount, type, category, date }`. `amount` is stored as a **string** (this is the intentional bug: arithmetic on string amounts produces string concatenation instead of numeric sums).
-- `description`, `amount`, `type`, `category` — controlled form inputs for adding a transaction.
-- `filterType`, `filterCategory` — filter selectors; filtering is applied inline on each render (no `useMemo`).
-
-**Derived values** (`totalIncome`, `totalExpenses`, `balance`) are computed directly in the render function from the `transactions` array.
+- **`App`** — root component. Owns `transactions` state and `handleAdd`. Passes data down via props. `categories` is a module-level constant defined in `App.jsx`.
+- **`Summary`** — receives `transactions`, computes `totalIncome`, `totalExpenses`, and `balance` internally.
+- **`TransactionForm`** — owns its own form state (`description`, `amount`, `type`, `category`). Calls `onAdd(transaction)` prop on submit.
+- **`TransactionList`** — receives `transactions` and `categories`. Owns its own `filterType` / `filterCategory` state and applies filtering internally.
 
 Styles are in `src/App.css`. `.income-amount` / `.expense-amount` / `.balance-amount` classes control the color-coded amounts throughout the UI.
