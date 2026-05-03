@@ -49,6 +49,38 @@ h1 {
   font-weight: bold;
 }
 
+.charts {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.chart-section {
+  flex: 1;
+  border: 1px solid #ddd;
+  padding: 16px;
+  background: #fff;
+}
+
+.chart-section h2 {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.chart-empty {
+  font-size: 13px;
+  color: #aaa;
+  text-align: center;
+  padding: 40px 0;
+}
+
+@media (max-width: 600px) {
+  .charts {
+    flex-direction: column;
+  }
+}
+
 .add-transaction {
   border: 1px solid #ddd;
   padding: 16px;
